@@ -1,11 +1,20 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { useNavigation } from "@react-navigation/core";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { Button } from "../components/Button";
 import { Container } from "../components/Container";
 import colors from "../styles/colors";
 import fonts from "../styles/fonts";
 
 export function UserIdentification() {
+  const navigation = useNavigation();
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
   const [name, setName] = useState<string>();
@@ -24,27 +33,33 @@ export function UserIdentification() {
     setName(value);
   }
 
+  function handleSubmit() {
+    navigation.navigate("Confirmation");
+  }
+
   return (
     <Container>
-      <View style={styles.form}>
-        <View style={styles.header}>
-          <Text style={styles.emoji}>{ isFilled ? '😄' : '🙂'}</Text>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.form}>
+          <View style={styles.header}>
+            <Text style={styles.emoji}>{isFilled ? "😄" : "🙂"}</Text>
+          </View>
+          <Text style={styles.title}>Como podemos {"\n"} chamar você?</Text>
+          <TextInput
+            style={[
+              styles.input,
+              (isFocused || isFilled) && { borderColor: colors.green },
+            ]}
+            placeholder="Digite um nome"
+            onBlur={handleInputBlur}
+            onFocus={handleInputFocus}
+            onChangeText={handleInputChange}
+          />
+          <View style={styles.footer}>
+            <Button onPress={handleSubmit} title="Confirmar" />
+          </View>
         </View>
-        <Text style={styles.title}>Como podemos {"\n"} chamar você?</Text>
-        <TextInput
-          style={[
-            styles.input,
-            (isFocused || isFilled) && { borderColor: colors.green },
-          ]}
-          placeholder="Digite um nome"
-          onBlur={handleInputBlur}
-          onFocus={handleInputFocus}
-          onChangeText={handleInputChange}
-        />
-        <View style={styles.footer}>
-          <Button />
-        </View>
-      </View>
+      </TouchableWithoutFeedback>
     </Container>
   );
 }

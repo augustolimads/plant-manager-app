@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet, SafeAreaView, KeyboardAvoidingView, Platform } from "react-native";
+import colors from "../styles/colors";
 
 type Props = {
-    children?: JSX.Element,
+    children?: JSX.Element[] | JSX.Element,
   };
 
 export function Container({children}:Props) {
@@ -22,8 +23,6 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       width: "100%",
-      backgroundColor: "#fff",
-      alignItems: "center",
-      justifyContent: "space-around",
+      backgroundColor: colors.background
     },
   });

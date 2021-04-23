@@ -4,11 +4,18 @@ import colors from "../styles/colors";
 import fonts from "../styles/fonts";
 import { Button } from "../components/Button";
 import { Container } from "../components/Container";
+import { useNavigation } from "@react-navigation/core";
 
 export function Confirmation() {
+  const navigation = useNavigation();
+
+  function handleMoveOn(){
+    navigation.navigate('PlantSelect')
+  }
+
   return (
     <Container>
-      <View style={styles.container}>
+      <View style={styles.content}>
         <Text style={styles.emoji}> 😊 </Text>
         <Text style={styles.title}> Prontinho </Text>
         <Text style={styles.subtitle}>
@@ -17,6 +24,7 @@ export function Confirmation() {
         <View style={styles.footer}>
           <Button
             title="Começar"
+            onPress={handleMoveOn}
           />
         </View>
       </View>
@@ -25,7 +33,7 @@ export function Confirmation() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  content: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",

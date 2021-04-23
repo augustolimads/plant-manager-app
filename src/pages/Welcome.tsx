@@ -23,7 +23,7 @@ export function Welcome() {
 
   return (
     <Container>
-      <View style={styles.wrapper}>
+      <View style={styles.content}>
         <Text style={styles.title}>
           Gerencie {"\n"} suas plantas de {"\n"} forma fácil
         </Text>
@@ -41,7 +41,7 @@ export function Welcome() {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
+  content: {
     flex: 1,
     alignItems: "center",
     justifyContent: "space-around",

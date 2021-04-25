@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -13,6 +13,7 @@ import fonts from "../styles/fonts";
 import { Feather } from "@expo/vector-icons";
 import { Container } from "../components/Container";
 import { useNavigation } from "@react-navigation/core";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function Welcome() {
   const navigation = useNavigation();
@@ -20,6 +21,16 @@ export function Welcome() {
   function handleStart(){
     navigation.navigate('UserIdentification')
   }
+
+  useEffect(() => {
+    async function loadStorageUserName() {
+        const user = await AsyncStorage.getItem('@plantmanager:user')
+        if(user)
+          navigation.navigate('PlantSelect')
+    }
+
+    loadStorageUserName()
+  },[])
 
   return (
     <Container>
